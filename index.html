@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>😂 Gotcha!</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      text-align: center;
+      padding-top: 20%;
+    }
+    h1 {
+      color: red;
+      font-size: 3em;
+    }
+  </style>
+</head>
+<body>
+  <h1>😂 Gotcha!</h1>
+  <p>Too late to mute 😈</p>
+
+  <audio id="prank-audio">
+    <source src="moaning.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    window.addEventListener('load', () => {
+      const audio = document.getElementById('prank-audio');
+      audio.play().catch(() => {
+        const unlock = () => {
+          audio.play();
+          document.removeEventListener('click', unlock);
+        };
+        document.addEventListener('click', unlock);
+      });
+    });
+  </script>
+</body>
+</html>
