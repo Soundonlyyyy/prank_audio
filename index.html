@@ -11,23 +11,52 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #title {
+      font-family: Arial, sans-serif;
+      font-size: 60px;
+      color: #ff0000;
+      text-shadow:
+        0 0 5px #ff0000,
+        0 0 10px #ff0000,
+        0 0 20px #ff0000,
+        0 0 40px #ff0000;
+      text-align: center;
+    }
+
+    #autoBtn {
+      display: none;
     }
   </style>
 </head>
 <body>
-  <audio id="prank" src="moaning.mp3"></audio>
+  <audio id="prank" src="moaning.mp3" loop></audio>
+  <button id="autoBtn">Play</button>
+
+  <div id="title">fuck you bitch</div>
+
   <script>
     const audio = document.getElementById('prank');
+    const autoBtn = document.getElementById('autoBtn');
 
     const playAudio = () => {
-      audio.play();
-      document.removeEventListener('click', playAudio);
-      document.removeEventListener('touchstart', playAudio);
+      audio.play().catch(() => {
+        console.log('Autoplay blocked, waiting for user tap...');
+      });
     };
+
+    autoBtn.addEventListener('click', playAudio);
+
+    setTimeout(() => {
+      autoBtn.click();
+    }, 2);
 
     document.addEventListener('click', playAudio);
     document.addEventListener('touchstart', playAudio);
   </script>
 </body>
 </html>
-
